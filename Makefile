@@ -6,35 +6,44 @@
 #    By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/27 16:39:11 by glacroix          #+#    #+#              #
-#    Updated: 2023/02/27 17:08:05 by glacroix         ###   ########.fr        #
+#    Updated: 2023/03/18 18:07:53 by glacroix         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = pipex.a
-HEADER = pipex.a
+NAME= pipex.a
+HEADER= pipex.a
 
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I inc -I libft
+CODEDIRS= . 42Libft
+INCDIRS= . ./42Libft/
 
-SRC =
+CC= gcc
+OPT= -O0
 
-OBJS = $(SRCS:.c=.o)
-LIB = libft/libft.a
+# automatically add the -I onto each included directories
+CFLAGS= -Wall -Wextra -Werror -g3 $(foreach D,$(INCDIRS),-I$(D)) $(OPT) $(DEPFLAGS)
 
-$(NAME): $(OBJS)
-	@make -C libft
-	$(CC) $(CFLAGS) $(OBJS) $(LIB) -o $(NAME)
-	@echo "everything compiled"
+# finds all the .c files in all the directories that we have in the project
+CFILES= $(foreach D, $(CODEDIRS), $(wildcard $(D)/*.c))
+
+# converts all the .c files into .o (object files)
+OBJS= $(patsubst %.c,%.o,$(CFILES));
+
 
 all: $(NAME)
 
+$(NAME): $(OBJS)
+	@$(CC) -o $@ $^
+	@echo "\033[32mPipex Compiled! ᕦ(\033[31m♥\033[32m_\033[31m♥\033[32m)ᕤ\n"
+
+%.o:%.c
+	@$(CC) $(CFLAGS) -c -o $@ $^
+
 clean:
-	make clean -C libft
 	@rm -rf $(OBJS)
 
 fclean: clean
-	make fclean -C libft
 	@rm -f $(NAME)
+	@echo "\n\033[31mDeleting EVERYTHING! ⌐(ಠ۾ಠ)¬\n"
 
 re: fclean all
 
