@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_utils.c                                      :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 16:04:23 by glacroix          #+#    #+#             */
-/*   Updated: 2023/03/18 18:17:09 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/03/19 13:15:20 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,12 @@
 char *find_path(char cmd, char **env)
 {
 	int i = 0;
+	char **possible_path;
 	char *path;
 	
 	while (ft_strnstr(env[i], "PATH=", 5) == 0)
 		i++;
-	path = ft_split(env[i], ':');
+	possible_path = ft_split(env[i], ':');
 	//
 }
 

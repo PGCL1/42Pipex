@@ -6,7 +6,7 @@
 #    By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/27 16:39:11 by glacroix          #+#    #+#              #
-#    Updated: 2023/03/18 18:07:53 by glacroix         ###   ########.fr        #
+#    Updated: 2023/03/19 13:17:08 by glacroix         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "\n\033[31mDeleting EVERYTHING! ⌐(ಠ۾ಠ)¬\n"
+	@echo "\n\033[31mCleaned up your MESS! ⌐(ಠ۾ಠ)¬\n"
 
 re: fclean all
 
