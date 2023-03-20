@@ -6,15 +6,15 @@
 #    By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/27 16:39:11 by glacroix          #+#    #+#              #
-#    Updated: 2023/03/19 13:17:08 by glacroix         ###   ########.fr        #
+#    Updated: 2023/03/20 13:36:58 by glacroix         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME= pipex.a
 HEADER= pipex.a
 
-CODEDIRS= . 42Libft
-INCDIRS= . ./42Libft/
+CODEDIRS= . 42Libft 42Get_next_line
+INCDIRS= . ./42Libft/ ./42Get_next_line/
 
 CC= gcc
 OPT= -O0
@@ -33,7 +33,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(CC) -o $@ $^
-	@echo "\033[32mPipex Compiled! ᕦ(\033[31m♥\033[32m_\033[31m♥\033[32m)ᕤ\n"
+	@echo "\n\033[32mPipex Compiled! ᕦ(\033[31m♥\033[32m_\033[31m♥\033[32m)ᕤ\n"
 
 %.o:%.c
 	@$(CC) $(CFLAGS) -c -o $@ $^

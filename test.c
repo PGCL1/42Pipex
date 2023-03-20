@@ -10,9 +10,22 @@ int main()
 	else
 		printf("Hello from the parent\n");
 
-	int id = fork();
+	id = fork();
 	if (id != 0){
 		fork();
 	}
 	printf("Hello Word\n");
 } */
+
+#include <stdio.h>
+
+extern char **environ;
+
+int main() {
+
+  for (; *environ; environ++) {
+    printf("%s\n", *environ);
+  }
+
+  return 0;
+}
