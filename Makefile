@@ -6,7 +6,7 @@
 #    By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/27 16:39:11 by glacroix          #+#    #+#              #
-#    Updated: 2023/03/21 12:53:43 by glacroix         ###   ########.fr        #
+#    Updated: 2023/03/21 18:15:56 by glacroix         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ re: fclean all
 leaks:
 	@echo 7768696c6520747275653b20646f206c65616b732070697065783b20736c65657020323b20646f6e653b | xxd -r -p | zsh
 
-norma:
+norm:
 	@echo 6966205b5b2024286e6f726d696e65747465207c206772657020274572726f7227207c207763202d6c29202d65712030205d5d3b207468656e206e6f726d696e657474653b20656c736520286e6f726d696e65747465207c206772657020274572726f7227293b206669 | xxd -r -p | zsh
 
-.PHONY: all clean fclean re norma
+.PHONY: all clean fclean re norm leaks

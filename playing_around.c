@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 12:53:38 by glacroix          #+#    #+#             */
-/*   Updated: 2023/03/21 11:00:02 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/03/21 18:09:59 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int main(int argc, char **argv, char **envp)
 		close(fd_p[WRITE_END]);
 
 		//execlp
-		execve(path, cmd, envp);
+		execlp("/bin/sleep", "sleep", "5", NULL);
 	}
 	else //parent
 	{
@@ -47,8 +47,8 @@ int main(int argc, char **argv, char **envp)
 			close(fd_p[READ_END]);
 
 			//execlp
-			execve(path, cmd, envp);
-			execlp("/usr/bin/wc", "wc", NULL);
+			//execlp("/bin/ls", "ls", NULL);
+			execlp("/bin/sleep", "sleep", "5", NULL);
 		}
 		else
 			close(fd_p[WRITE_END]);
