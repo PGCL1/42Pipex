@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 16:04:23 by glacroix          #+#    #+#             */
-/*   Updated: 2023/03/20 19:24:27 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/03/21 13:15:29 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,41 +20,35 @@
 
 char *find_path(char **envp, char *cmd)
 {
-	int i = 0;
 	int j = 0;
-	char **path;
-	char *real_path;
+	char **possible_path;
+	char *path;
 	
-	while (ft_strnstr(envp[j], "PATH=", 5) == 0)
+	while (ft_strnstr((envp[j]), "PATH=", 5) == 0)
 		j++;
-	path = ft_split(envp[j] + 5, ':');
-	j = 0;
-	//!mistake here
-	while (path[j] != NULL)
-		path = ft_strjoin(path, '/');
-	real_path = ft_strjoin(path, cmd);
-	i = 0;
-	while (path[i] != NULL)
+	possible_path = ft_split(envp[j] + 5, ':');
+	j = -1;
+	while (possible_path[++j] != NULL)
 	{
-		if (access(path[i], X_OK) == 0)
-			return (path[i]);
-		i++;		
+		possible_path[j] = ft_strjoin(possible_path[j], "/");
+		path = ft_strjoin(possible_path[j], cmd);
+		if (access(path, X_OK) == 0)
+			return (path);
+		else
+			free(path);
+		printf("Path is %s\n", path);	
 	}
+	return ("ERROR");
 }
 
-int main(int argc, char **argv)
+int main(int argc, char **argv, char **envp)
 {
-	int i = 0;
-	char **split;
+	char *path;
+	char *cmd = argv[1];
 	if (argc == 2)
 	{
-		split = ft_split(argv[1], '\n');
-		while (split[i] != 0)
-		{
-			printf("%s ", split[i]);
-			i++;
-		}
-		printf("%s", split[i]);
+		path = find_path(envp, cmd);
+		printf("%s", path);
 	}
 	return (0);
 }

@@ -1,6 +1,6 @@
-/* #include "pipex.h"
+#include "pipex.h"
 //trying to program "ls -l | wc > txt_file"
-int main(int argc, char **argv)
+/*int main(int argc, char **argv)
 {
 	int fdp[2];
 	int fd;
@@ -48,3 +48,4 @@ int main(int argc, char **argv)
 
 	return (0);
 } */
+

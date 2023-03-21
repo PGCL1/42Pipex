@@ -6,15 +6,15 @@
 #    By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/27 16:39:11 by glacroix          #+#    #+#              #
-#    Updated: 2023/03/20 13:36:58 by glacroix         ###   ########.fr        #
+#    Updated: 2023/03/21 12:53:43 by glacroix         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME= pipex.a
-HEADER= pipex.a
+NAME= pipex
+HEADER= pipex.h
 
-CODEDIRS= . 42Libft 42Get_next_line
-INCDIRS= . ./42Libft/ ./42Get_next_line/
+CODEDIRS= . 42Libft_pipex 42Get_next_line
+INCDIRS= . ./42Libft_pipex/ ./42Get_next_line/
 
 CC= gcc
 OPT= -O0
@@ -43,7 +43,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "\n\033[31mCleaned up your MESS! ⌐(ಠ۾ಠ)¬\n"
+	@echo "\n\033[31mCleaning Up Directories! ⌐(ಠ۾ಠ)¬\n"
 
 re: fclean all
 

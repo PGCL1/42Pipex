@@ -16,7 +16,7 @@ int main()
 	}
 	printf("Hello Word\n");
 } */
-
+/* 
 #include <stdio.h>
 
 extern char **environ;
@@ -28,4 +28,4 @@ int main() {
   }
 
   return 0;
-}
+} */
