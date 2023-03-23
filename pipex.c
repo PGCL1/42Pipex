@@ -27,6 +27,7 @@ int pipex(char **envp, char **argv)
 		pid = fork();
 		if (pid < 0)
 			perror("Something failed when creating the second child process!\n");
+		//!second child function
 		if (pid == 0) //child
 		{
 			//cmd "wc"
