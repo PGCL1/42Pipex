@@ -1,51 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/22 17:00:10 by glacroix          #+#    #+#             */
+/*   Updated: 2023/03/22 17:05:03 by glacroix         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
-//trying to program "ls -l | wc > txt_file"
-/*int main(int argc, char **argv)
+
+int main(int argc, char **argv, char **envp)
 {
-	int fdp[2];
-	int fd;
-	pipe(fdp);
-
-	int file, status;
-
-	//child process
-	int pid = fork(); //processor id (pid)
-	if (pid < 0)
-		perror("Something failed when creating the first child process!\n");
-	if (pid == 0) //child
+	if (argc == 5)
 	{
-		//cmd "ls -l"
-		close(fdp[READ_END]);
-		dup2(fdp[WRITE_END], STDOUT_FILENO);
-		close(fdp[WRITE_END]);
-
-		//execlp
-		execve(path, cmd, env);
+		pipex(envp, argv);
 	}
-	else //parent
+	else if (argc > 5)
 	{
-		close(fdp[WRITE_END]);
-		pid = fork();
-		if (pid < 0)
-			perror("Something failed when creating the second child process!\n");
-		if (pid == 0) //child
-		{
-			//cmd "wc"
-			fd = open(FILE_NAME, O_RDWR, O_TRUNC, O_CREAT, 0664);
-			dup2(fdp[READ_END], STDIN_FILENO);
-			close(fdp[READ_END]);
-
-			dup2(fd, STDOUT_FILENO);
-
-			//execlp
-			execve(path, cmd, env);
-		}
-		else
-			close(fdp[READ_END]);
+		prerror("There are more than 5 arguments to satisfy PIPEX's requirements");
 	}
-	wait(&status);
-	wait(&status);
-
-	return (0);
-} */
-
+	else
+		prerror("There are not enough arguments to satisfy PIPEX's requirements");
+}

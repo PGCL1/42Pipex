@@ -29,3 +29,18 @@ int main() {
 
   return 0;
 } */
+
+/* int main(int argc, char **argv, char **envp)
+{
+	char *path;
+	char *cmd = argv[1];
+	int i = 0;
+	if (argc == 2)
+	{
+			path = find_path(envp, cmd);
+			printf("ANS: Path with multiple args: %s\n", path);
+			i++;
+	}
+	return (0);
+	
+} */

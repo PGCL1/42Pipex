@@ -6,11 +6,11 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 12:53:38 by glacroix          #+#    #+#             */
-/*   Updated: 2023/03/21 18:09:59 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:58:07 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* #include "pipex.h"
+#include "pipex.h"
 //trying to program "ls -l | wc > txt_file"
 int main(int argc, char **argv, char **envp)
 {
@@ -31,7 +31,7 @@ int main(int argc, char **argv, char **envp)
 		close(fd_p[WRITE_END]);
 
 		//execlp
-		execlp("/bin/sleep", "sleep", "5", NULL);
+		execve(path, **commandos, envp)
 	}
 	else //parent
 	{
@@ -57,4 +57,4 @@ int main(int argc, char **argv, char **envp)
 	wait(&status);
 
 	return (0);
-} */
+}
