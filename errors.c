@@ -1,28 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/22 17:00:10 by glacroix          #+#    #+#             */
-/*   Updated: 2023/03/24 16:42:46 by glacroix         ###   ########.fr       */
+/*   Created: 2023/03/24 16:24:23 by glacroix          #+#    #+#             */
+/*   Updated: 2023/03/24 16:38:05 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
 
-int main(int argc, char **argv, char **envp)
-{
-	if (argc == 5)
-	{
-		pipex(argv, envp);
-	}
-	else if (argc > 5)
-	{
-		perror("More than 5 arguments to satisfy PIPEX's requirements");
-	}
-	else
-		perror("Not enough arguments to satisfy PIPEX's requirements");
-	return (0);
-}

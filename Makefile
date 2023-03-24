@@ -6,14 +6,14 @@
 #    By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/27 16:39:11 by glacroix          #+#    #+#              #
-#    Updated: 2023/03/21 18:15:56 by glacroix         ###   ########.fr        #
+#    Updated: 2023/03/24 16:40:08 by glacroix         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME= pipex
 HEADER= pipex.h
 
-CODEDIRS= . 42Libft_pipex 42Get_next_line
+CODEDIRS= . 42Libft_pipex/ 42Get_next_line
 INCDIRS= . ./42Libft_pipex/ ./42Get_next_line/
 
 CC= gcc
