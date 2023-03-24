@@ -6,7 +6,7 @@
 #    By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/27 16:39:11 by glacroix          #+#    #+#              #
-#    Updated: 2023/03/24 16:40:08 by glacroix         ###   ########.fr        #
+#    Updated: 2023/03/24 18:16:11 by glacroix         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ HEADER= pipex.h
 
 CODEDIRS= . 42Libft_pipex/ 42Get_next_line
 INCDIRS= . ./42Libft_pipex/ ./42Get_next_line/
+
 
 CC= gcc
 OPT= -O0
