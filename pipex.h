@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 16:39:18 by glacroix          #+#    #+#             */
-/*   Updated: 2023/03/27 14:24:40 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/03/27 18:58:25 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <sys/wait.h>
 # include <sys/errno.h>
 # include <fcntl.h>
-# include "./42Libft_pipex/libft.h"
+# include "./42Libft/libft.h"
 # include "./42GNL/get_next_line_bonus.h"
 
 # define READ_END 0
