@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/24 16:24:23 by glacroix          #+#    #+#             */
-/*   Updated: 2023/03/27 18:49:16 by glacroix         ###   ########.fr       */
+/*   Created: 2022/10/06 14:19:55 by glacroix          #+#    #+#             */
+/*   Updated: 2023/03/24 17:35:52 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-extern int errno;
-
-void error_log(void)
+int	ft_lstsize(t_list *lst)
 {
-	perror("Error printed by perror: ");
-	ft_putstr_fd(strerror(errno), 1);
-	exit(EXIT_FAILURE);
+	int	x;
+
+	x = 0;
+	if (!lst)
+		return (0);
+	while (lst != NULL)
+	{
+		lst = lst -> next;
+		x++;
+	}
+	return (x);
 }

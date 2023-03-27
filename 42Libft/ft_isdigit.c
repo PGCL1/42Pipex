@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/24 16:24:23 by glacroix          #+#    #+#             */
-/*   Updated: 2023/03/27 18:49:16 by glacroix         ###   ########.fr       */
+/*   Created: 2022/09/13 15:16:21 by glacroix          #+#    #+#             */
+/*   Updated: 2023/03/24 17:42:40 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-extern int errno;
-
-void error_log(void)
+int	ft_isdigit(int x)
 {
-	perror("Error printed by perror: ");
-	ft_putstr_fd(strerror(errno), 1);
-	exit(EXIT_FAILURE);
+	return (x > 47 && x < 58);
 }

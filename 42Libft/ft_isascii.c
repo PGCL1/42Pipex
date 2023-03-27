@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/24 16:24:23 by glacroix          #+#    #+#             */
-/*   Updated: 2023/03/27 18:49:16 by glacroix         ###   ########.fr       */
+/*   Created: 2022/09/13 15:34:07 by glacroix          #+#    #+#             */
+/*   Updated: 2023/03/24 17:19:43 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-extern int errno;
-
-void error_log(void)
+int	ft_isascii(int c)
 {
-	perror("Error printed by perror: ");
-	ft_putstr_fd(strerror(errno), 1);
-	exit(EXIT_FAILURE);
+	return (c >= 0 && c <= 0177);
 }

@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/24 16:24:23 by glacroix          #+#    #+#             */
-/*   Updated: 2023/03/27 18:49:16 by glacroix         ###   ########.fr       */
+/*   Created: 2022/09/13 19:47:30 by glacroix          #+#    #+#             */
+/*   Updated: 2023/03/24 17:16:44 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-extern int errno;
-
-void error_log(void)
+void	ft_bzero(void *str, size_t n)
 {
-	perror("Error printed by perror: ");
-	ft_putstr_fd(strerror(errno), 1);
-	exit(EXIT_FAILURE);
+	ft_memset(str, 0, n);
 }

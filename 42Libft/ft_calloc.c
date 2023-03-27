@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/24 16:24:23 by glacroix          #+#    #+#             */
-/*   Updated: 2023/03/27 18:49:16 by glacroix         ###   ########.fr       */
+/*   Created: 2022/09/26 11:05:47 by glacroix          #+#    #+#             */
+/*   Updated: 2023/03/24 17:17:05 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-extern int errno;
-
-void error_log(void)
+void	*ft_calloc(size_t count, size_t size)
 {
-	perror("Error printed by perror: ");
-	ft_putstr_fd(strerror(errno), 1);
-	exit(EXIT_FAILURE);
+	unsigned char	*s;
+
+	s = (unsigned char *)malloc(count * size);
+	if (s == 0)
+		return (0);
+	ft_bzero(s, count * size);
+	return (s);
 }

@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 16:04:23 by glacroix          #+#    #+#             */
-/*   Updated: 2023/03/24 18:15:37 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/03/27 18:51:38 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*find_path(char **envp, char *cmd)
 		else
 			free(path);
 	}
-	return ("ERROR");
+	return (strerror(errno));
 }
 
 int	execute_cmd(char *cmd, char **envp)
@@ -63,7 +63,7 @@ void	first_child(char **argv, char **envp, int *fdp)
 
 	infile = open(argv[1], O_RDWR, 0644);
 	if (infile < 0)
-		exit(EXIT_FAILURE);
+		error_log();
 	if (access(argv[1], R_OK) < 0)
 		exit(127);
 	dup2(infile, STDIN_FILENO);
@@ -79,7 +79,7 @@ void	second_child(char **argv, char **envp, int *fdp)
 
 	outfile = open(argv[4], O_RDWR | O_TRUNC | O_CREAT, 0644);
 	if (outfile < 0)
-		exit(EXIT_FAILURE);
+		error_log();
 	dup2(fdp[READ_END], STDIN_FILENO);
 	close(fdp[READ_END]);
 	dup2(outfile, STDOUT_FILENO);

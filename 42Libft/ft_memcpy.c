@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/24 16:24:23 by glacroix          #+#    #+#             */
-/*   Updated: 2023/03/27 18:49:16 by glacroix         ###   ########.fr       */
+/*   Created: 2022/09/14 14:38:52 by glacroix          #+#    #+#             */
+/*   Updated: 2023/03/24 17:34:21 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-extern int errno;
-
-void error_log(void)
+void	*ft_memcpy(void *dst, void *src, size_t n)
 {
-	perror("Error printed by perror: ");
-	ft_putstr_fd(strerror(errno), 1);
-	exit(EXIT_FAILURE);
+	unsigned int long	x;
+
+	x = 0;
+	if (src == 0 && dst == 0)
+		return (0);
+	if (src == dst)
+		return (dst);
+	while (x < n)
+	{
+		((unsigned char *)dst)[x] = ((unsigned char *)src)[x];
+		x++;
+	}
+	return (dst);
 }
