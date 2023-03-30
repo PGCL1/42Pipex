@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 16:04:23 by glacroix          #+#    #+#             */
-/*   Updated: 2023/03/27 18:51:38 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/03/30 19:25:54 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,47 @@
  * need to check if the command exists within the path
 */
 
-char	*find_path(char **envp, char *cmd)
+void	execute_cmd(char *cmd, char **envp)
+{
+	char	**args;
+	
+	args = malloc(sizeof(char *) * 3);
+	args[0] = ft_strdup("bash");
+	args[1] = ft_strdup("-c");
+	args[2] = ft_strdup(cmd);
+	execve("/bin/bash", args, envp);
+}
+
+void	first_child(char **argv, char **envp, t_pipe *pointer)
+{
+	pointer->fd[0] = open(argv[1], O_RDWR, 0644);
+	if (pointer->fd[0] < 0)
+		error_log();
+	if (access(argv[1], R_OK) < 0)
+		error_log();
+	dup2(pointer->fd[0], STDIN_FILENO);
+	close(pointer->pipe[READ_END]);
+	dup2(pointer->pipe[WRITE_END], STDOUT_FILENO);
+	close(pointer->pipe[WRITE_END]);
+	execute_cmd(argv[2], envp);
+
+}
+
+void	second_child(char **argv, char **envp, t_pipe *pointer)
+{
+	pointer->fd[1] = open(argv[4], O_RDWR | O_TRUNC | O_CREAT, 0644);
+	if (pointer->fd[1] < 0)
+		error_log();
+	if (access(argv[4], R_OK) == -1)
+		error_log();
+	dup2(pointer->pipe[READ_END], STDIN_FILENO);
+	close(pointer->pipe[READ_END]);
+	dup2(pointer->fd[1], STDOUT_FILENO);
+	//ACCESS FUNCTION
+	execute_cmd(argv[3], envp);
+}
+
+ char	*find_path(char **envp, char *cmd)
 {
 	int		j;
 	char	**possible_path;
@@ -42,46 +82,5 @@ char	*find_path(char **envp, char *cmd)
 		else
 			free(path);
 	}
-	return (strerror(errno));
-}
-
-int	execute_cmd(char *cmd, char **envp)
-{
-	char	*path;
-	char	**num_cmd;
-	int		result;
-
-	path = find_path(envp, cmd);
-	num_cmd = ft_split(cmd, ' ');
-	result = execve(path, num_cmd, envp);
-	return (result);
-}
-
-void	first_child(char **argv, char **envp, int *fdp)
-{
-	int	infile;
-
-	infile = open(argv[1], O_RDWR, 0644);
-	if (infile < 0)
-		error_log();
-	if (access(argv[1], R_OK) < 0)
-		exit(127);
-	dup2(infile, STDIN_FILENO);
-	close(fdp[READ_END]);
-	dup2(fdp[WRITE_END], STDOUT_FILENO);
-	close(fdp[WRITE_END]);
-	execute_cmd(argv[2], envp);
-}
-
-void	second_child(char **argv, char **envp, int *fdp)
-{
-	int	outfile;
-
-	outfile = open(argv[4], O_RDWR | O_TRUNC | O_CREAT, 0644);
-	if (outfile < 0)
-		error_log();
-	dup2(fdp[READ_END], STDIN_FILENO);
-	close(fdp[READ_END]);
-	dup2(outfile, STDOUT_FILENO);
-	execute_cmd(argv[3], envp);
+	return (NULL);
 }

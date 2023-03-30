@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 16:39:18 by glacroix          #+#    #+#             */
-/*   Updated: 2023/03/27 18:58:25 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/03/30 17:58:35 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,18 @@
 # define READ_END 0
 # define WRITE_END 1
 # define FILE_NAME "file.txt"
-# define FIRST_CHILD_FAIL "Problem with first child process!\n"
-# define SECOND_CHILD_FAIL "Problem with second child process!\n"
 
-char	*find_path(char **envp, char *cmd);
-int		execute_cmd(char *cmd, char **envp);
-void	first_child(char **argv, char **envp, int *fdp);
-void	second_child(char **argv, char **envp, int *fdp);
+typedef struct s_pipe
+{
+	int fd[2];
+	int pipe[2];
+	pid_t pid;
+	int status;
+}				t_pipe;
+
+void	execute_cmd(char *cmd, char **envp);
+void	first_child(char **argv, char **envp, t_pipe *pointer);
+void	second_child(char **argv, char **envp, t_pipe *pointer);
 int		main(int argc, char **argv, char **envp);
 int		pipex(char **argv, char **envp);
 void	error_log(void);

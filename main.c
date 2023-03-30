@@ -6,11 +6,11 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 17:00:10 by glacroix          #+#    #+#             */
-/*   Updated: 2023/03/24 18:16:08 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/03/30 17:39:51 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../pipex.h"
 
 
 int	main(int argc, char **argv, char **envp)
@@ -31,3 +31,7 @@ int	main(int argc, char **argv, char **envp)
 	}
 	return (0);
 }
+
+/* args = {"bash", "-c", argv[1], NULL}
+
+execve("/bin/bash", args, NULL) */
