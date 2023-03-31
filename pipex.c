@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 17:05:40 by glacroix          #+#    #+#             */
-/*   Updated: 2023/03/30 18:34:14 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/03/31 13:37:19 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ int	pipex(char **argv, char **envp)
 	if (pi.pid < 0)
 		perror("");
 	if (pi.pid == 0)
+	{
 		first_child(argv, envp, &pi);
+	}	
 	else
 	{
 		close(pi.pipe[WRITE_END]);

@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 17:00:10 by glacroix          #+#    #+#             */
-/*   Updated: 2023/03/30 17:39:51 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/03/31 16:22:34 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ int	main(int argc, char **argv, char **envp)
 	}
 	else if (argc > 5)
 	{
-		perror("More than 5 arguments to satisfy PIPEX's requirements");
+		ft_putstr_fd(strerror(22), 2);
 		exit(EXIT_FAILURE);
 	}
 	else
 	{
-		perror("Not enough arguments to satisfy PIPEX's requirements");
+		ft_putstr_fd(strerror(22), 2);
 		exit(EXIT_FAILURE);
 	}
 	return (0);
