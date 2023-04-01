@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 16:39:18 by glacroix          #+#    #+#             */
-/*   Updated: 2023/03/31 16:17:04 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/01 20:07:58 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <sys/wait.h>
 # include <sys/errno.h>
 # include <fcntl.h>
+# include <stdarg.h>
 # include "./42Libft/libft.h"
 # include "./42GNL/get_next_line_bonus.h"
 
@@ -41,6 +42,6 @@ void	first_child(char **argv, char **envp, t_pipe *pointer);
 void	second_child(char **argv, char **envp, t_pipe *pointer);
 int		main(int argc, char **argv, char **envp);
 int		pipex(char **argv, char **envp);
-void	error_log(void);
+void	print_error(char *format, ...);
 
 #endif

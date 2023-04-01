@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 16:04:23 by glacroix          #+#    #+#             */
-/*   Updated: 2023/03/31 17:09:06 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/01 20:11:42 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,10 @@ void	execute_cmd(char *cmd, char **envp)
 void	first_child(char **argv, char **envp, t_pipe *pointer)
 {
 	pointer->fd[0] = open(argv[1], O_RDWR, 0644);
-	if (pointer->fd[0] < 0)
+	/* if (pointer->fd[0] < 0)
 		error_log();
 	if (access(argv[1], R_OK) < 0)
-		error_log();
-	//printf("%d\n", access(find_path(envp, argv[2]), X_OK));
+		error_log(); */
 	dup2(pointer->fd[0], STDIN_FILENO);
 	close(pointer->pipe[READ_END]);
 	dup2(pointer->pipe[WRITE_END], STDOUT_FILENO);
@@ -47,10 +46,10 @@ void	first_child(char **argv, char **envp, t_pipe *pointer)
 void	second_child(char **argv, char **envp, t_pipe *pointer)
 {
 	pointer->fd[1] = open(argv[4], O_RDWR | O_TRUNC | O_CREAT, 0644);
-	if (pointer->fd[1] < 0)
-		error_log();
+/* 	if (pointer->fd[1] < 0)
+		error_log(); */
 	if (access(argv[4], R_OK | W_OK) == -1)
-		error_log();
+		print_error("pipex: %s: command not found", argv[4]);
 	dup2(pointer->pipe[READ_END], STDIN_FILENO);
 	close(pointer->pipe[READ_END]);
 	dup2(pointer->fd[1], STDOUT_FILENO);
