@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 21:20:06 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/01 20:07:14 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/02 20:00:13 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ void print_error(char *format, ...)
 			s = va_arg(ap, char *);
 			j = 0;
 			while (s[j] != '\0')
-				write(1, &s[j++], 1);
+				write(2, &s[j++], 1);
 			i++;
 		}
 		else
-			write(1, &format[i], 1);
+			write(2, &format[i], 1);
 		i++;
 	}
 	va_end(ap);

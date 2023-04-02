@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 16:39:18 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/01 20:07:58 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/02 20:13:08 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ void	second_child(char **argv, char **envp, t_pipe *pointer);
 int		main(int argc, char **argv, char **envp);
 int		pipex(char **argv, char **envp);
 void	print_error(char *format, ...);
+void	error_log(void);
 
 #endif
