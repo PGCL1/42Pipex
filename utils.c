@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 16:04:23 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/02 20:28:45 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/02 21:15:05 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	execute_cmd(char *cmd, char **envp)
 	args[1] = ft_strdup("-c");
 	args[2] = ft_strdup(cmd);
 	execve("/bin/bash", args, envp);
+	
 }
 
 void	first_child(char **argv, char **envp, t_pipe *pointer)
@@ -85,5 +86,5 @@ void	second_child(char **argv, char **envp, t_pipe *pointer)
 		else
 			free(path);
 	}
-	return (strerror(errno));
+	return (NULL);
 }
