@@ -6,11 +6,18 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 21:20:06 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/03 19:44:27 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/03 19:55:34 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+/**
+ * It's a function that takes a format string and a variable number of 
+ * arguments, and prints the formatted string to the standard error output
+ * 
+ * @param format The format string.
+ */
 
 void	print_error(char *format, ...)
 {
