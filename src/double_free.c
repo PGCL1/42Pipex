@@ -6,16 +6,16 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 16:15:54 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/03 16:25:36 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/03 19:40:54 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void double_free(char **pointer)
+void	double_free(char **pointer)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	while (pointer[i] != NULL)
 	{

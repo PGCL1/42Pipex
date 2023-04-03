@@ -1,34 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/24 17:05:40 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/03 19:42:00 by glacroix         ###   ########.fr       */
+/*   Created: 2023/04/03 19:33:31 by glacroix          #+#    #+#             */
+/*   Updated: 2023/04/03 19:39:20 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
-int	pipex(char **argv, char **envp)
+int main(int argc, char **argv, char **envp)
 {
-	t_pipe	pi;
-
-	pipe(pi.pipe);
-	pi.pid = fork();
-	if (pi.pid < 0)
-		perror("");
-	if (pi.pid == 0)
-		first_child(argv, envp, &pi);
+	if (argc >= 5)
+		pipex(argv, envp);
 	else
-	{
-		close(pi.pipe[WRITE_END]);
-		second_child(argv, envp, &pi);
-		close(pi.pipe[READ_END]);
-	}
-	wait(&pi.status);
-	wait(&pi.status);
+		print_error("pipex: %s", strerror(22));
 	return (0);
 }

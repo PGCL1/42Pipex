@@ -6,21 +6,15 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 16:04:23 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/03 17:29:38 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/03 19:48:50 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-/** 
- * Objective is to find the path associated to the command
- * we will need to find the line in env[i] = "PATH=" 
- * need to check if the command exists within the path
-*/
-
 void	execute_cmd(char *cmd, char **envp, int *flag)
 {
-	char **args;
+	char	**args;
 
 	artificial_bash(cmd, flag);
 	args = malloc(sizeof(char *) * 3);
@@ -37,13 +31,12 @@ void	execute_cmd(char *cmd, char **envp, int *flag)
 	}
 	else
 		execve("/bin/bash", args, envp);
-	
 }
 
-void artificial_bash(char *cmd, int *flag)
+void	artificial_bash(char *cmd, int *flag)
 {
 	if (ft_strnstr(cmd, ".sh", ft_strlen(cmd)) != NULL && 
-		access(cmd, X_OK) == -1)
+	access(cmd, X_OK) == -1)
 	{
 		if (*flag == 1)
 		{
@@ -57,22 +50,23 @@ void artificial_bash(char *cmd, int *flag)
 
 void	first_child(char **argv, char **envp, t_pipe *pointer)
 {
-	int flag;
+	int	flag;
 
 	flag = 0;
 	pointer->fd[0] = open(argv[1], O_RDWR, 0644);
-	if (pointer->fd[0] < 0) // no such file or directory
+	//no such file or directory
+	if (pointer->fd[0] < 0) 
 	{
 		print_error("pipex: %s: %s\n", argv[1], strerror(2));
 		exit(EXIT_FAILURE);
 	}
-	if (access(argv[1], R_OK) < 0) //permissions
+	//permissions
+	if (access(argv[1], R_OK) < 0) 
 		print_error("pipex: %s: %s", argv[1], strerror(13)); 
 	dup2(pointer->fd[0], STDIN_FILENO);
 	close(pointer->pipe[READ_END]);
 	dup2(pointer->pipe[WRITE_END], STDOUT_FILENO);
 	close(pointer->pipe[WRITE_END]);
-	//first command doesn't exist
 	execute_cmd(argv[2], envp, &flag);
 }
 
@@ -82,14 +76,15 @@ void	second_child(char **argv, char **envp, t_pipe *pointer)
 
 	flag = 1;
 	pointer->fd[1] = open(argv[4], O_RDWR | O_TRUNC | O_CREAT, 0644);
-	if (pointer->fd[1] < 0) // no such file or directory
+	//no such file or directory
+	if (pointer->fd[1] < 0) 
 		error_log();
-	if (access(argv[4], R_OK | W_OK) == -1) //permissions
+	//permissions
+	if (access(argv[4], R_OK | W_OK) == -1) 
 		print_error("pipex: %s: %s", argv[4], strerror(13));
 	dup2(pointer->pipe[READ_END], STDIN_FILENO);
 	close(pointer->pipe[READ_END]);
 	dup2(pointer->fd[1], STDOUT_FILENO);
-	//access second command doesn't exist
 	execute_cmd(argv[3], envp, &flag);
 }
 

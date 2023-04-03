@@ -1,34 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   print_error_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/24 17:05:40 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/03 19:42:00 by glacroix         ###   ########.fr       */
+/*   Created: 2023/04/03 19:37:51 by glacroix          #+#    #+#             */
+/*   Updated: 2023/04/03 19:38:04 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
-int	pipex(char **argv, char **envp)
+void print_error(char *format, ...)
 {
-	t_pipe	pi;
-
-	pipe(pi.pipe);
-	pi.pid = fork();
-	if (pi.pid < 0)
-		perror("");
-	if (pi.pid == 0)
-		first_child(argv, envp, &pi);
-	else
+	va_list ap;
+	va_start(ap, format);
+	int i = 0;
+	int j = 0;
+	char *s;
+	
+	while (format[i])
 	{
-		close(pi.pipe[WRITE_END]);
-		second_child(argv, envp, &pi);
-		close(pi.pipe[READ_END]);
+		if (format[i] == '%' && format[i+1] == 's')
+		{
+			s = va_arg(ap, char *);
+			j = 0;
+			while (s[j] != '\0')
+				write(2, &s[j++], 1);
+			i++;
+		}
+		else
+			write(2, &format[i], 1);
+		i++;
 	}
-	wait(&pi.status);
-	wait(&pi.status);
-	return (0);
+	va_end(ap);
 }
