@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   double_free.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/24 17:05:40 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/03 13:38:01 by glacroix         ###   ########.fr       */
+/*   Created: 2023/04/03 16:15:54 by glacroix          #+#    #+#             */
+/*   Updated: 2023/04/03 16:25:36 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-
-int	pipex(char **argv, char **envp)
+void double_free(char **pointer)
 {
-	t_pipe	pi;
+	int i;
 	
-	pipe(pi.pipe);
-	pi.pid = fork();
-	if (pi.pid < 0)
-		perror("");
-	if (pi.pid == 0)
+	i = 0;
+	while (pointer[i] != NULL)
 	{
-		first_child(argv, envp, &pi);
-	}	
-	else
-	{
-		close(pi.pipe[WRITE_END]);
-		second_child(argv, envp, &pi);
-		close(pi.pipe[READ_END]);
+		free(pointer[i]);
+		i++;
 	}
-	wait(&pi.status);
-	wait(&pi.status);
-	return (0);
+	free(pointer);
 }

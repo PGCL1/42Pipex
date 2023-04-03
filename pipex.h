@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 16:39:18 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/02 21:12:46 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/03 17:24:34 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 # define READ_END 0
 # define WRITE_END 1
 # define FILE_NAME "file.txt"
-
 typedef struct s_pipe
 {
 	int fd[2];
@@ -36,7 +35,7 @@ typedef struct s_pipe
 	int status;
 }				t_pipe;
 
-void	execute_cmd(char *cmd, char **envp);
+void	execute_cmd(char *cmd, char **envp, int *flag);
 char	*find_path(char **envp, char *cmd);
 void	first_child(char **argv, char **envp, t_pipe *pointer);
 void	second_child(char **argv, char **envp, t_pipe *pointer);
@@ -44,5 +43,7 @@ int		main(int argc, char **argv, char **envp);
 int		pipex(char **argv, char **envp);
 void	print_error(char *format, ...);
 void	error_log(void);
+void	double_free(char **pointer);
+void	artificial_bash(char *cmd, int *flag);
 
 #endif

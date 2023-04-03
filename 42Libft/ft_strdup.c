@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 11:11:48 by glacroix          #+#    #+#             */
-/*   Updated: 2023/03/24 17:26:38 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/03 16:19:47 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strdup(char *s1)
 	len = ft_strlen(s1);
 	string = (malloc((len + 1) * sizeof(char)));
 	if (!string)
-		return (0);
+		return (NULL);
 	ft_memcpy(string, s1, len * sizeof(char));
 	string[len] = 0;
 	return (string);
