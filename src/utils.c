@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 16:04:23 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/03 19:54:23 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/04 18:50:24 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,24 @@ void	execute_cmd(char *cmd, char **envp, int *flag)
 {
 	char	**args;
 
-	artificial_bash(cmd, flag);
 	args = malloc(sizeof(char *) * 3);
 	args[0] = ft_strdup("bash");
 	args[1] = ft_strdup("-c");
 	args[2] = ft_strdup(cmd);
-	if (find_path(envp, cmd) == NULL)
+	if (access(find_path(envp, cmd), X_OK) == -1)
 	{
-		print_error("pipex: %s: command not found\n", cmd);
-		if (*flag == 1)
-			exit(127);
+		if (errno == 13)
+		{
+			print_error("pipex: %s: %s\n", cmd, strerror(errno));
+			if (*flag == 1)
+				exit(126);
+		}
+		else if (errno == 2)
+		{
+			print_error("pipex: %s: command not found\n", cmd);
+			if (*flag == 1)
+				exit(127);	
+		}
 	}
 	else
 		execve("/bin/bash", args, envp);
@@ -48,7 +56,7 @@ void	execute_cmd(char *cmd, char **envp, int *flag)
  * @param flag This is a pointer to an integer that is used to determine if the
  * program is being run in the background or not.
  */
-
+/*
 void	artificial_bash(char *cmd, int *flag)
 {
 	if (ft_strnstr(cmd, ".sh", ft_strlen(cmd)) != NULL
@@ -62,7 +70,7 @@ void	artificial_bash(char *cmd, int *flag)
 		else
 			print_error("pipex: %s: %s\n", cmd, strerror(errno));
 	}
-}
+} */
 
 /**
  * It opens the file, checks for errors, and then executes the command.
@@ -135,8 +143,6 @@ char	*find_path(char **envp, char *cmd)
 	char	**num_cmd;
 	char	*path;
 
-	if (access(cmd, X_OK) == 0)
-		return (cmd);
 	j = 0;
 	while (ft_strnstr((envp[j]), "PATH=", 5) == 0)
 		j++;
@@ -153,5 +159,5 @@ char	*find_path(char **envp, char *cmd)
 		else
 			free(path);
 	}
-	return (NULL);
+	return (cmd);
 }
