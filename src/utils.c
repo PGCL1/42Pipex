@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 16:04:23 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/04 18:50:24 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/06 15:05:34 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,30 +47,6 @@ void	execute_cmd(char *cmd, char **envp, int *flag)
 	else
 		execve("/bin/bash", args, envp);
 }
-
-/**
- * It checks if the command is a shell script and if it is, it checks if it's
- * executable. If it's not, it prints an error message
- * 
- * @param cmd the command to be executed
- * @param flag This is a pointer to an integer that is used to determine if the
- * program is being run in the background or not.
- */
-/*
-void	artificial_bash(char *cmd, int *flag)
-{
-	if (ft_strnstr(cmd, ".sh", ft_strlen(cmd)) != NULL
-		&& access(cmd, X_OK) == -1)
-	{
-		if (*flag == 1)
-		{
-			print_error("pipex: %s: %s\n", cmd, strerror(errno));
-			exit(EXIT_FAILURE);
-		}
-		else
-			print_error("pipex: %s: %s\n", cmd, strerror(errno));
-	}
-} */
 
 /**
  * It opens the file, checks for errors, and then executes the command.
@@ -161,3 +137,44 @@ char	*find_path(char **envp, char *cmd)
 	}
 	return (cmd);
 }
+
+
+/*
+if we split we get 
+ls 
+-l
+42libft
+
+then we join 
+at each step we do access command
+so we get
+1. access path ls				OK			0
+2. access bash -c ls -l 		OK 			1	cmd = ls -l
+3. acess path-c ls -l 42Libft   KO
+	break
+4. substring starting pos of end -l + 1 to the end ----> option
+5. 
+ls -l 42libft
+
+args = {ls, -l, 42Libft, NULL}
+args = {"ls", "-l 42libft"}
+execve (path, args, envp)
+
+*******************************************************
+
+if we split we get 
+awk {print++} END {print++};
+
+then we join 
+at each step we do access command
+so we get
+1. access path awk				OK			cmd = awk
+2. access path awk {print++}	KO 			
+	break
+3. substring starting pos of end awk to the end ----> option
+ls -l 42libft
+
+args = {ls, -l, 42Libft, NULL}
+args = {"ls", "-l 42libft"}
+execve (path, args, envp)
+*/
