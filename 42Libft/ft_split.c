@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 21:37:27 by glacroix          #+#    #+#             */
-/*   Updated: 2023/03/24 17:26:06 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/11 17:26:33 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,18 +98,15 @@ char	**ft_split(char *s, char c)
 
 /* #include <stdio.h>
 
-int	ma2in(void)
+int	main(int argc, char **argv)
 {
 	int		i;
 	char	**tab;
 
 	i = 0;
-	tab = ft_split("buenos esrerth erhttrr drhtrtb drhggg", 32);
-	while (i < 6)
-	{
-		printf("string: %d %s\n", i, tab[i]);
-		i++;
-	}
-	system ("leaks a.out");
+	tab = ft_split("awk \"\'{count++} END {print count}\'\"", 34);
+	while (tab[i])
+		printf("string: %d %s\n", i, tab[i++]);
+ 	system ("leaks a.out");
 	return (0);
 }  */
