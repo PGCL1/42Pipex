@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:26:53 by glacroix          #+#    #+#             */
-/*   Updated: 2023/03/24 17:41:27 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/11 12:34:02 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,16 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+# include <fcntl.h>
+# include <stdlib.h>
+# include <limits.h>
+# include <stdarg.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
+
+
 
 typedef struct s_list
 {
@@ -24,6 +34,9 @@ typedef struct s_list
 	struct s_list	*next;
 }				t_list;
 
+char	*get_next_line(int fd);
+size_t	ft_strlen_gnl(char *str);
+char	*ft_strjoin_gnl(char *s1, char *s2);
 void	ft_bzero(void *str, size_t n);
 int		ft_isalpha(int x);
 int		ft_isdigit(int x);

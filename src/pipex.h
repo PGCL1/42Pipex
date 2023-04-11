@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 16:39:18 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/03 19:42:43 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/11 12:36:21 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <fcntl.h>
 # include <stdarg.h>
 # include "../42Libft/libft.h"
-# include "../42GNL/get_next_line_bonus.h"
 
 # define READ_END 0
 # define WRITE_END 1
