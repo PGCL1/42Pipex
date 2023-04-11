@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 17:05:40 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/05 11:44:36 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/03 19:55:31 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 
 int	pipex(char **argv, char **envp)
 {
-	
 	t_pipe	pi;
 
 	pipe(pi.pipe);
