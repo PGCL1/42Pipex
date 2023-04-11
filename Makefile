@@ -6,7 +6,7 @@
 #    By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/27 16:39:11 by glacroix          #+#    #+#              #
-#    Updated: 2023/04/03 19:26:56 by glacroix         ###   ########.fr        #
+#    Updated: 2023/04/11 12:40:56 by glacroix         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ SRC =	main.c\
 		errors.c\
 		pipex.c\
 		print_error.c\
-		utils.c
+		utils.c\
+		ft_leaks.c
 
 SRCS = $(addprefix $(SRC_PATH), $(SRC))
 

@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 16:15:54 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/03 19:55:24 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/11 14:35:09 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,8 @@ void	double_free(char **pointer)
 {
 	int	i;
 
-	i = 0;
-	while (pointer[i] != NULL)
-	{
+	i = -1;
+	while (pointer[++i] != NULL)
 		free(pointer[i]);
-		i++;
-	}
 	free(pointer);
 }
