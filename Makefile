@@ -6,7 +6,7 @@
 #    By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/27 16:39:11 by glacroix          #+#    #+#              #
-#    Updated: 2023/04/11 12:40:56 by glacroix         ###   ########.fr        #
+#    Updated: 2023/04/13 16:28:31 by glacroix         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,17 +18,17 @@ CFLAGS = -Wall -Wextra -Werror
 DEBUG = -g -fsanitize=address
 
 LIBFT = ./42Libft/libft.a
-LIB = src/pipex.h
+PIPEX = ./include/pipex.h
 
 SRC_PATH = ./src/
 
 SRC =	main.c\
-		double_free.c\
+		commands.c\
 		errors.c\
+		memory.c\
 		pipex.c\
-		print_error.c\
 		utils.c\
-		ft_leaks.c
+		path.c
 
 SRCS = $(addprefix $(SRC_PATH), $(SRC))
 
@@ -40,7 +40,7 @@ make_libft:
 	@make all -C ./42Libft
 
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) -I $(LIB) $(LIBFT) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) -I $(PIPEX) $(LIBFT) -o $(NAME)
 
 clean:
 	@rm -f $(OBJS)

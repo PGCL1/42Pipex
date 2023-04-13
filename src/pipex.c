@@ -6,11 +6,11 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 17:05:40 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/03 19:55:31 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/13 16:20:03 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../include/pipex.h"
 
 /**
  * It creates a pipe, forks, and then the child process writes to the pipe 

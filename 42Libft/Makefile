@@ -44,7 +44,7 @@ SRC =  ft_bzero.c\
 OBJS = $(SRC:.c=.o)
 
 $(NAME): $(OBJS) 
-	ar crs $(NAME) $(OBJS)
+	@ar crs $(NAME) $(OBJS)
 
 SRC_BONUS =	ft_lstnew_bonus.c\
 		ft_lstadd_front_bonus.c\
@@ -62,7 +62,7 @@ BONUS_OBJS = $(SRC_BONUS:.c=.o)
 all: $(NAME)
 
 bonus:
-	make SRC='$(SRC) $(SRC_BONUS)'
+	@make SRC='$(SRC) $(SRC_BONUS)'
 	
 clean: 
 	$(RM) $(OBJS) $(BONUS_OBJS)

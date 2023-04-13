@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_leaks.c                                         :+:      :+:    :+:   */
+/*   memory.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/11 12:38:33 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/11 14:32:56 by glacroix         ###   ########.fr       */
+/*   Created: 2023/04/02 21:16:19 by glacroix          #+#    #+#             */
+/*   Updated: 2023/04/13 16:19:56 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../include/pipex.h"
 
 static void        system_exec(char *cmdtemplate)
 {
@@ -44,4 +44,14 @@ void ft_leaks(void)
 	system_exec("");
 	exit_checks();
 	return ;
+}
+
+void	double_free(char **pointer)
+{
+	int	i;
+
+	i = 0;
+	while (pointer[i] != NULL)
+		free(pointer[i++]);
+	free(pointer);
 }

@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 16:39:18 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/11 16:39:10 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/13 15:35:50 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ typedef struct s_pipe
 	int		status;
 }				t_pipe;
 
-void	execute_cmd(char *cmd, char **envp, int *flag);
-char	*find_path(char **envp, char *cmd);
+void	execute_cmd(char *cmd, char **envp, int flag);
+char	**find_possible_path(char **envp);
+char	*find_real_path(char **envp, char *cmd);
 void	first_child(char **argv, char **envp, t_pipe *pointer);
 void	second_child(char **argv, char **envp, t_pipe *pointer);
 int		main(int argc, char **argv, char **envp);
@@ -43,8 +44,9 @@ int		pipex(char **argv, char **envp);
 void	print_error(char *format, ...);
 void	error_log(void);
 void	double_free(char **pointer);
-void	artificial_bash(char *cmd, int *flag);
 void	ft_leaks(void);
 char	**find_cmd(char *cmd);
+int		check_cmd(char *cmd);
+char	*clean_cmd_0(char *cmd);
 
 #endif
