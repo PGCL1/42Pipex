@@ -6,55 +6,79 @@
 #    By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/27 16:39:11 by glacroix          #+#    #+#              #
-#    Updated: 2023/04/13 16:28:31 by glacroix         ###   ########.fr        #
+#    Updated: 2023/04/14 23:35:27 by glacroix         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = pipex
-NAME_BONUS = pipex_bonus
+#Programs
+# **************************************************************************** #
+PROG			= pipex
+PROG_B			= pipex_bonus
 
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
-DEBUG = -g -fsanitize=address
+#Execution
+# **************************************************************************** #
+CC				= gcc
+CFLAGS			= -Wall -Wextra -Werror
+DEBUG			= -g -fsanitize=address
+INCLUDES		= -Iinclude
 
-LIBFT = ./42Libft/libft.a
-PIPEX = ./include/pipex.h
+#SRC Details
+# **************************************************************************** #
+SRCS_PATH       = ./src/
+SRCS            = $(addprefix $(SRCS_PATH), $(SRC))
+SRC				= main.c \
+					commands.c\
+				    errors.c\
+				    memory.c\
+				    pipex.c\
+				    utils.c\
+				    path.c
+OBJS            =   $(SRCS:%.c=%.o)
 
-SRC_PATH = ./src/
+#Bonus SRC Details
+# **************************************************************************** #
+BONUS_SRCS_PATH	= ./src_bonus
+BONUS_SRCS		= $(addprefix $(BONUS_SRCS_PATH), $(BONUS_SRCS))
+BONUS_SRC		= pipex_bonus.c\
+					utils_bonus.c
+BONUS_OBJS		= $(BONUS_SRCS:.c=.o)
 
-SRC =	main.c\
-		commands.c\
-		errors.c\
-		memory.c\
-		pipex.c\
-		utils.c\
-		path.c
+#SRC & BONUS SRC Executions
+# **************************************************************************** #
+${PROG}: ${OBJS}
+	@echo "\033[33m----Compiling lib----"
+	@make re -C ./42Libft
+	@$(CC) ${OBJS} -L42Libft -lft -o ${PROG}
+	@echo "\n\033[32mPipex Compiled! 	"
+	@echo "\033[32mLibft Compiled! ᕦ(\033[31m♥\033[32m_\033[31m♥\033[32m)ᕤ\n"
 
-SRCS = $(addprefix $(SRC_PATH), $(SRC))
+${OBJS}: $(SRCS_PAT)%.o: $(SRCS_PAT)%.c
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-OBJS = $(SRCS:.c=.o)
+${PROG_B}: ${OBJS_B}
+	@echo "\033[33m----Compiling lib----"
+	@make re -C ./42Libft
+	@$(CC) ${OBJS_B} -L42Libft -lft -o ${PROG_B}
+	@echo "\033[32m Bonus Compiled! ᕦ(\033[31m♥\033[32m_\033[31m♥\033[32m)ᕤ\n"
 
-all: make_libft $(NAME)
+#Makefile Commands
+# **************************************************************************** #
+all: ${PROG}
 
-make_libft:
-	@make all -C ./42Libft
-
-$(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) -I $(PIPEX) $(LIBFT) -o $(NAME)
+bonus: ${PROG_B}
 
 clean:
-	@rm -f $(OBJS)
 	@make clean -C ./42Libft
-	@rm -rf $(OBJS_PATH)
-
+	@rm -f ${OBJS} ${OBJS_B}
 
 fclean: clean
-	@rm -f $(NAME)
 	@make fclean -C ./42Libft
-	@rm -rf $(OBJS_PATH)
+	@rm -f $(NAME)
+	@rm -f ${PROG}
+	@echo "\n\033[31mDeleting EVERYTHING! ⌐(ಠ۾ಠ)¬\n"
 
 re: fclean all
 
-re_bonus: fclean
+re_bonus: fclean bonus
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re re_bonus bonus

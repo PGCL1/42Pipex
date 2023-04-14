@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/27 16:39:18 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/14 15:35:30 by glacroix         ###   ########.fr       */
+/*   Created: 2023/04/03 19:31:45 by glacroix          #+#    #+#             */
+/*   Updated: 2023/04/03 19:40:02 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
+
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -21,6 +22,7 @@
 # include <fcntl.h>
 # include <stdarg.h>
 # include "../42Libft/libft.h"
+# include "../42GNL/get_next_line_bonus.h"
 
 # define READ_END 0
 # define WRITE_END 1
@@ -28,25 +30,13 @@
 
 typedef struct s_pipe
 {
-	int		fd[2];
-	int		pipe[2];
-	pid_t	pid;
-	int		status;
+	int fd[2];
+	int pipe[2];
+	pid_t pid;
+	int status;
 }				t_pipe;
 
-void	execute_cmd(char *cmd, char **envp, int flag);
-char	**find_possible_path(char **envp);
-char	*find_real_path(char **envp, char *cmd);
-void	first_child(char **argv, char **envp, t_pipe *pointer);
-void	second_child(char **argv, char **envp, t_pipe *pointer);
 int		main(int argc, char **argv, char **envp);
-int		pipex(char **argv, char **envp);
 void	print_error(char *format, ...);
-void	error_log(void);
-void	double_free(char **pointer);
-void	ft_leaks(void);
-char	**find_cmd(char *cmd);
-int		check_cmd(char *cmd);
-char	*clean_cmd_0(char *cmd);
 
 #endif

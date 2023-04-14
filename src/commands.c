@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 11:41:58 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/13 17:04:31 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/14 14:58:40 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int check_cmd(char *cmd)
 	{
 		if (ft_strtrim(cmd, " \\'\"") != NULL)
 			return (1);
+		else
+			return (0);
 	}
 	return (0);
 }
