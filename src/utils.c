@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 16:04:23 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/13 17:06:23 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/15 22:09:29 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	first_child(char **argv, char **envp, t_pipe *pointer)
 	execute_cmd(argv[2], envp, flag);
 }
 
-
 void	second_child(char **argv, char **envp, t_pipe *pointer)
 {
 	int	flag;
@@ -55,7 +54,7 @@ void	second_child(char **argv, char **envp, t_pipe *pointer)
 	close(pointer->pipe[READ_END]);
 	dup2(pointer->fd[1], STDOUT_FILENO);
 	execute_cmd(argv[3], envp, flag);
-} 
+}
 
 /**
  * It executes the command
@@ -69,12 +68,11 @@ void	second_child(char **argv, char **envp, t_pipe *pointer)
 void	execute_cmd(char *cmd, char **envp, int flag)
 {
 	char	**args;
-	
- 	if (check_cmd(cmd) == 1)
-		return;
+
+	if (check_cmd(cmd) == 1)
+		return ;
 	if (access(find_real_path(envp, cmd), X_OK) == -1)
 	{
-		//no permissions
 		if (errno == 13)
 		{
 			print_error("pipex: %s: %s\n", cmd, strerror(errno));
@@ -85,7 +83,7 @@ void	execute_cmd(char *cmd, char **envp, int flag)
 		{
 			print_error("pipex: %s: command not found\n", cmd);
 			if (flag == 1)
-				exit(127);	
+				exit(127);
 		}
 	}
 	else

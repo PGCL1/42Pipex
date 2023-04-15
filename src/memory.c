@@ -6,16 +6,16 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 21:16:19 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/13 16:19:56 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/15 22:03:33 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-static void        system_exec(char *cmdtemplate)
+/* static void	system_exec(char *cmdtemplate)
 {
-    FILE* fp = popen(cmdtemplate, "r");
-    if (fp == NULL) 
+	FILE* fp = popen(cmdtemplate, "r");
+    if (fp == NULL)
 	{
 		ft_putstr_fd("Error opening command", 2);
 		ft_putstr_fd(cmdtemplate, 2);
@@ -26,7 +26,7 @@ static void        system_exec(char *cmdtemplate)
 	output[n] = '\0';
 	ft_putstr_fd(output, 2);
 }
-static void exit_checks(void)
+static void	exit_checks(void)
 {
     char cmdtemplate[1024];
     ft_putstr_fd("\n\n******************************************\n", 2);
@@ -37,9 +37,9 @@ static void exit_checks(void)
     sprintf(cmdtemplate, "leaks %d", getpid());
     system_exec(cmdtemplate);
     ft_putstr_fd("******************************************\n", 2);
-}
+} */
 
-void ft_leaks(void)
+void	ft_leaks(void)
 {
 	system_exec("");
 	exit_checks();
