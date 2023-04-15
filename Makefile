@@ -6,7 +6,7 @@
 #    By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/27 16:39:11 by glacroix          #+#    #+#              #
-#    Updated: 2023/04/14 23:35:27 by glacroix         ###   ########.fr        #
+#    Updated: 2023/04/15 19:02:29 by glacroix         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ INCLUDES		= -Iinclude
 # **************************************************************************** #
 SRCS_PATH       = ./src/
 SRCS            = $(addprefix $(SRCS_PATH), $(SRC))
-SRC				= main.c \
+SRC				= main.c\
 					commands.c\
 				    errors.c\
 				    memory.c\
