@@ -6,14 +6,14 @@
 #    By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/27 16:39:11 by glacroix          #+#    #+#              #
-#    Updated: 2023/04/15 19:35:48 by glacroix         ###   ########.fr        #
+#    Updated: 2023/04/15 20:06:04 by glacroix         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #Programs
 # **************************************************************************** #
-PROG			= pipex
-PROG_B			= pipex_bonus
+NAME			= pipex
+NAME_B			= pipex_bonus
 
 #Execution
 # **************************************************************************** #
@@ -21,7 +21,7 @@ CC				= gcc
 CFLAGS			= -Wall -Wextra -Werror
 DEBUG			= -g -fsanitize=address
 INCLUDES		= -Iinclude
-
+LIBFT			= ./42libft/libft.a
 #SRC Details
 # **************************************************************************** #
 SRCS_PATH       = ./src/
@@ -44,25 +44,25 @@ OBJS            =   $(SRCS:%.c=%.o)
 
 #SRC & BONUS SRC Executions
 # **************************************************************************** #
-${PROG}: ${OBJS}
+${NAME}: ${OBJS}
 	@echo "\033[33m----Compiling lib----"
-	@make re -C ./42Libft
-	@$(CC) $(CFLAGS) ${OBJS} $(INCLUDES) -L./42Libft -lft -o ${PROG}
-	@echo "\n\033[32mPipex Compiled! 	"
+	@make re -sC ./42Libft
+	@$(CC) $(CFLAGS) ${OBJS} $(INCLUDES) $(LIBFT) -o ${NAME}
+	@echo "\033[32mPipex Compiled! 	"
 	@echo "\033[32mLibft Compiled! ᕦ(\033[31m♥\033[32m_\033[31m♥\033[32m)ᕤ\n"
 
 
-#${PROG_B}: ${OBJS_B}
+#${NAME_B}: ${OBJS_B}
 #	@echo "\033[33m----Compiling lib----"
 #	@make re -C ./42Libft
-#	@$(CC) $(CFLAGS) ${OBJS_B} $(INCLUDES) -L./42Libft -lft -o ${PROG_B}
+#	@$(CC) $(CFLAGS) ${OBJS_B} $(INCLUDES) -L./42Libft -lft -o ${NAME_B}
 #	@echo "\033[32m Bonus Compiled! ᕦ(\033[31m♥\033[32m_\033[31m♥\033[32m)ᕤ\n"
 
 #Makefile Commands
 # **************************************************************************** #
-all: ${PROG}
+all: ${NAME}
 
-#bonus: ${PROG_B}
+#bonus: ${NAME_B}
 
 clean:
 	@make clean -C ./42Libft
@@ -71,7 +71,7 @@ clean:
 fclean: clean
 	@make fclean -C ./42Libft
 	@rm -f $(NAME)
-	@rm -f ${PROG} $(PROG_B)
+	@rm -f ${NAME} $(NAME_B)
 	@echo "\n\033[31mDeleting EVERYTHING! ⌐(ಠ۾ಠ)¬\n"
 
 re: fclean all
