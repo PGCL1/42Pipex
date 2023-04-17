@@ -6,18 +6,19 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 11:41:58 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/15 22:01:28 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/17 15:56:04 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
+#include <stdio.h>
 
 char	**find_cmd(char *cmd)
 {
-	if (ft_strchr(cmd, 34))
-		return (ft_split(cmd, 34));
-	else if (ft_strchr(cmd, 39))
+	if (ft_strchr(cmd, 39))
 		return (ft_split(cmd, 39));
+	else if (ft_strchr(cmd, 34))
+		return (ft_split(cmd, 34));
 	else
 		return (ft_split(cmd, 32));
 }
@@ -37,10 +38,13 @@ int	check_cmd(char *cmd)
 {
 	if (ft_strnstr(cmd, ".sh", ft_strlen(cmd)))
 	{
-		if (ft_strtrim(cmd, " \\'\"") != NULL)
+		if (ft_strchr(cmd, 32) != NULL)
 			return (1);
-		else
-			return (0);
+		if (!ft_strnstr(cmd, "./", 2) && !ft_strchr(cmd, '/'))
+		{
+			print_error("pipex: %s: command not found\n", cmd);
+			return (1);
+		}
 	}
 	return (0);
 }
@@ -50,7 +54,7 @@ int	check_cmd(char *cmd)
 	if (argc > 0)
 	{
 		char *cmd = argv[1];
-		printf("Clean cmd %s", clean_cmd_0(cmd));
-		return (0);
+		printf("Check cmd is %d\n", check_cmd(cmd));
 	}
-} */
+	return 0;
+}  */

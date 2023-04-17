@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 17:00:10 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/13 17:07:46 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/17 15:56:35 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,7 @@
 int	main(int argc, char **argv, char **envp)
 {
 	if (argc == 5)
-	{
-		if (!*envp)
-			*envp = "PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:";
 		pipex(argv, envp);
-	}
 	else
 	{
 		ft_putstr_fd(strerror(22), 2);
@@ -27,7 +23,3 @@ int	main(int argc, char **argv, char **envp)
 	}
 	return (0);
 }
-
-/* args = {"bash", "-c", argv[1], NULL}
-cmd  = "ls -l"
-execve("/bin/bash", args, NULL) */

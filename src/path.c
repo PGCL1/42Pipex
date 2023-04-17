@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 15:33:18 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/15 22:07:39 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/17 15:58:01 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,14 @@ char	**find_possible_path(char **envp)
 	char	**possible_path;
 
 	j = 0;
-	while (ft_strnstr((envp[j]), "PATH=", 5) == 0)
+	while (envp[j] != NULL)
+	{
+		if (ft_strncmp(envp[j], "PATH=", 5) == 0)
+			break ;
 		j++;
+	}
+	if (envp[j] == NULL)
+		envp[j] = "PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:";
 	possible_path = ft_split(envp[j] + 5, ':');
 	return (possible_path);
 }
