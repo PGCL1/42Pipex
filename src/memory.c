@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 21:16:19 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/15 22:03:33 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/15 22:11:53 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ static void	exit_checks(void)
     ft_putstr_fd("******************************************\n", 2);
 } */
 
-void	ft_leaks(void)
+/* void	ft_leaks(void)
 {
 	system_exec("");
 	exit_checks();
 	return ;
-}
+} */
 
 void	double_free(char **pointer)
 {

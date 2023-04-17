@@ -1,38 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_error_bonus.c                                :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/03 19:37:51 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/03 19:38:04 by glacroix         ###   ########.fr       */
+/*   Created: 2023/04/15 22:37:47 by glacroix          #+#    #+#             */
+/*   Updated: 2023/04/15 23:17:46 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex_bonus.h"
+#include "../include/pipex_bonus.h"
 
-void print_error(char *format, ...)
+void child_processes(char *argv, char **envp)
 {
-	va_list ap;
-	va_start(ap, format);
-	int i = 0;
-	int j = 0;
-	char *s;
-	
-	while (format[i])
+	t_pipe	pi;
+
+	pipe(pi.pipe);
+	pi.pid = fork();
+	if (pi.pid < 0)
+		perror("");
+	if (pi.pid == 0)
 	{
-		if (format[i] == '%' && format[i+1] == 's')
-		{
-			s = va_arg(ap, char *);
-			j = 0;
-			while (s[j] != '\0')
-				write(2, &s[j++], 1);
-			i++;
-		}
-		else
-			write(2, &format[i], 1);
-		i++;
+		close(pi.pipe[WRITE_END]);
+		dup2(fd[1], STDIN_FILENO);
+		execute_cmd(argv, envp);
 	}
-	va_end(ap);
+	else
+	{
+		close(pi.pipe[READ_END]);
+		dup2(fd[0], STDOUT_FILENO);
+		waitpid(pid, NULL, 0);
+	}
 }
