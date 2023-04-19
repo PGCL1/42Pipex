@@ -6,13 +6,13 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 11:41:58 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/17 16:15:43 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/19 18:56:30 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-char	**find_cmd(char *cmd)
+char	**cmd_find(char *cmd)
 {
 	if (ft_strchr(cmd, 39))
 		return (ft_split(cmd, 39));
@@ -22,18 +22,18 @@ char	**find_cmd(char *cmd)
 		return (ft_split(cmd, 32));
 }
 
-char	*clean_cmd_0(char *cmd)
+char	*cmd_find_args0(char *cmd)
 {
 	char	**args;
 	char	*result;
 
-	args = find_cmd(cmd);
+	args = cmd_find(cmd);
 	result = ft_strtrim(args[0], " \\'\"");
-	double_free(args);
+	free_pointer2pointer(args);
 	return (result);
 }
 
-int	check_cmd(char *cmd)
+int	cmd_check(char *cmd)
 {
 	if (ft_strnstr(cmd, ".sh", ft_strlen(cmd)))
 	{
@@ -41,7 +41,7 @@ int	check_cmd(char *cmd)
 			return (1);
 		if (!ft_strnstr(cmd, "./", 2) && !ft_strchr(cmd, '/'))
 		{
-			print_error("pipex: %s: command not found\n", cmd);
+			error_print("pipex: %s: command not found\n", cmd);
 			return (1);
 		}
 	}

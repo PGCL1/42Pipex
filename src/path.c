@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 15:33:18 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/19 17:08:26 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/19 18:50:02 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 	return;
 } */
 
-char	**find_possible_path(char **envp)
+char	**path_find_possible(char **envp)
 {
 	int		j;
 	char	**possible_path;
@@ -43,7 +43,7 @@ char	*path_or_command(char *cmd, char **envp, char **args)
 	int		i;
 
 	i = -1;
-	paths = find_possible_path(envp);
+	paths = path_find_possible(envp);
 	while (!ft_strnstr(cmd, ".sh", ft_strlen(cmd)) && paths[++i] != NULL)
 	{
 		slash = ft_strjoin(paths[i], "/");
@@ -51,18 +51,18 @@ char	*path_or_command(char *cmd, char **envp, char **args)
 		free(slash);
 		if (access(path, X_OK) == 0)
 		{
-			double_free(paths);
-			double_free(args);
+			free_pointer2pointer(paths);
+			free_pointer2pointer(args);
 			return (path);
 		}
 		free(path);
 	}
-	double_free(paths);
-	double_free(args);
+	free_pointer2pointer(paths);
+	free_pointer2pointer(args);
 	return (cmd);
 }
 
-char	*find_real_path(char **envp, char *cmd)
+char	*path_found(char **envp, char *cmd)
 {
 	char	**args;
 	char	*result;

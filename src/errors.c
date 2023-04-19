@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 21:20:06 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/15 22:01:49 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/19 18:43:40 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * @param format The format string.
  */
 
-void	print_error(char *format, ...)
+void	error_print(char *format, ...)
 {
 	va_list	ap;
 	int		i;

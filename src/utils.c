@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 16:04:23 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/19 16:58:54 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/19 18:57:51 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,16 @@ void	first_child(char **argv, char **envp, t_pipe *pointer)
 	pointer->fd[0] = open(argv[1], O_RDWR, 0644);
 	if (pointer->fd[0] < 0)
 	{
-		print_error("pipex: %s: %s\n", argv[1], strerror(2));
+		error_print("pipex: %s: %s\n", argv[1], strerror(2));
 		exit(EXIT_FAILURE);
 	}
 	if (access(argv[1], R_OK) < 0)
-		print_error("pipex: %s: %s\n", argv[1], strerror(13));
+		error_print("pipex: %s: %s\n", argv[1], strerror(13));
 	dup2(pointer->fd[0], STDIN_FILENO);
 	close(pointer->pipe[READ_END]);
 	dup2(pointer->pipe[WRITE_END], STDOUT_FILENO);
 	close(pointer->pipe[WRITE_END]);
-	execute_cmd(argv[2], envp, flag);
+	cmd_error_check(argv[2], envp, flag);
 }
 
 void	second_child(char **argv, char **envp, t_pipe *pointer)
@@ -49,11 +49,11 @@ void	second_child(char **argv, char **envp, t_pipe *pointer)
 	if (pointer->fd[1] < 0)
 		error_log();
 	if (access(argv[4], R_OK | W_OK) == -1)
-		print_error("pipex: %s: %s\n", argv[4], strerror(13));
+		error_print("pipex: %s: %s\n", argv[4], strerror(13));
 	dup2(pointer->pipe[READ_END], STDIN_FILENO);
 	close(pointer->pipe[READ_END]);
 	dup2(pointer->fd[1], STDOUT_FILENO);
-	execute_cmd(argv[3], envp, flag);
+	cmd_error_check(argv[3], envp, flag);
 }
 
 /**
@@ -65,36 +65,36 @@ void	second_child(char **argv, char **envp, t_pipe *pointer)
  *  or not the program should exit after an error.
  */
 
-void	execute_cmd(char *cmd, char **envp, int flag)
+void	cmd_error_check(char *cmd, char **envp, int flag)
 {
 	char	*path;
 
-	path = find_real_path(envp, cmd);
-	if (check_cmd(cmd) == 1)
+	path = path_found(envp, cmd);
+	if (cmd_check(cmd) == 1)
 		return ;
 	if (access(path, X_OK) == -1)
 	{
 		if (errno == 13)
 		{
-			print_error("pipex: %s: %s\n", cmd, strerror(errno));
+			error_print("pipex: %s: %s\n", cmd, strerror(errno));
 			if (flag == 1)
 				exit(126);
 		}
 		else if (errno == 14 || errno == 2)
 		{
-			print_error("pipex: %s: command not found\n", cmd);
+			error_print("pipex: %s: command not found\n", cmd);
 			if (flag == 1)
 				exit(127);
 		}
 	}
 	else
-		execute_command(cmd, envp);
+		cmd_execution(cmd, envp);
 }
 
-void	execute_command(char *cmd, char **envp)
+void	cmd_execution(char *cmd, char **envp)
 {
 	char	**args;
 
-	args = find_cmd(cmd);
-	execve(find_real_path(envp, clean_cmd_0(cmd)), args, envp);
+	args = cmd_find(cmd);
+	execve(path_found(envp, cmd_find_args0(cmd)), args, envp);
 }

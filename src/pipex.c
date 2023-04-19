@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 17:05:40 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/19 18:20:29 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/19 18:56:53 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int	pipex(char **argv, char **envp)
 		close(pi.pipe[READ_END]);
 	}
 	if (wait(&pi.status) == -1)
-		print_error("pipex: %s\n", strerror(errno));
+		error_print("pipex: %s\n", strerror(errno));
 	if (wait(&pi.status) == -1)
-		print_error("pipex: %s\n", strerror(errno));
+		error_print("pipex: %s\n", strerror(errno));
 	return (0);
 }

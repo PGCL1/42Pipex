@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 21:16:19 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/15 22:11:53 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/19 18:47:26 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	exit_checks(void)
 	return ;
 } */
 
-void	double_free(char **pointer)
+void	free_pointer2pointer(char **pointer)
 {
 	int	i;
 
