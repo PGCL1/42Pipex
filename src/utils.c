@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 16:04:23 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/19 18:57:51 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/19 19:18:47 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * @param pointer a pointer to a t_pipe structure
  */
 
-void	first_child(char **argv, char **envp, t_pipe *pointer)
+void	child_first(char **argv, char **envp, t_pipe *pointer)
 {
 	int	flag;
 
@@ -40,7 +40,7 @@ void	first_child(char **argv, char **envp, t_pipe *pointer)
 	cmd_error_check(argv[2], envp, flag);
 }
 
-void	second_child(char **argv, char **envp, t_pipe *pointer)
+void	child_second(char **argv, char **envp, t_pipe *pointer)
 {
 	int	flag;
 
