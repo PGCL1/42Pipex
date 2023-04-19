@@ -6,12 +6,11 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 11:41:58 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/17 15:56:04 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/17 16:15:43 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
-#include <stdio.h>
 
 char	**find_cmd(char *cmd)
 {

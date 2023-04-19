@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 16:04:23 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/17 15:29:03 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/19 16:58:54 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,12 @@ void	second_child(char **argv, char **envp, t_pipe *pointer)
 
 void	execute_cmd(char *cmd, char **envp, int flag)
 {
-	char	**args;
+	char	*path;
 
+	path = find_real_path(envp, cmd);
 	if (check_cmd(cmd) == 1)
 		return ;
-	if (access(find_real_path(envp, cmd), X_OK) == -1)
+	if (access(path, X_OK) == -1)
 	{
 		if (errno == 13)
 		{
@@ -79,7 +80,7 @@ void	execute_cmd(char *cmd, char **envp, int flag)
 			if (flag == 1)
 				exit(126);
 		}
-		else if (errno == 2)
+		else if (errno == 14 || errno == 2)
 		{
 			print_error("pipex: %s: command not found\n", cmd);
 			if (flag == 1)
@@ -87,8 +88,13 @@ void	execute_cmd(char *cmd, char **envp, int flag)
 		}
 	}
 	else
-	{
-		args = find_cmd(cmd);
-		execve(find_real_path(envp, clean_cmd_0(cmd)), args, envp);
-	}	
+		execute_command(cmd, envp);
+}
+
+void	execute_command(char *cmd, char **envp)
+{
+	char	**args;
+
+	args = find_cmd(cmd);
+	execve(find_real_path(envp, clean_cmd_0(cmd)), args, envp);
 }

@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 17:00:10 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/17 15:56:35 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/19 16:51:42 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,3 +23,13 @@ int	main(int argc, char **argv, char **envp)
 	}
 	return (0);
 }
+
+/**
+ * if (*envp == NULL)
+		{
+			print_error("pipex: %s: command not found\n", argv[2]);
+			print_error("pipex: %s: command not found\n", argv[3]);
+			exit(EXIT_FAILURE);
+		}	
+ * 
+ * */

@@ -6,7 +6,7 @@
 /*   By: glacroix <glacroix@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 15:33:18 by glacroix          #+#    #+#             */
-/*   Updated: 2023/04/17 15:58:01 by glacroix         ###   ########.fr       */
+/*   Updated: 2023/04/19 17:08:26 by glacroix         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,28 +24,25 @@ char	**find_possible_path(char **envp)
 	char	**possible_path;
 
 	j = 0;
+	possible_path = NULL;
 	while (envp[j] != NULL)
 	{
 		if (ft_strncmp(envp[j], "PATH=", 5) == 0)
 			break ;
 		j++;
 	}
-	if (envp[j] == NULL)
-		envp[j] = "PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:";
 	possible_path = ft_split(envp[j] + 5, ':');
 	return (possible_path);
 }
 
-char	*find_real_path(char **envp, char *cmd)
+char	*path_or_command(char *cmd, char **envp, char **args)
 {
-	char	**args;
 	char	**paths;
 	char	*slash;
 	char	*path;
 	int		i;
 
 	i = -1;
-	args = ft_split(cmd, ' ');
 	paths = find_possible_path(envp);
 	while (!ft_strnstr(cmd, ".sh", ft_strlen(cmd)) && paths[++i] != NULL)
 	{
@@ -63,4 +60,20 @@ char	*find_real_path(char **envp, char *cmd)
 	double_free(paths);
 	double_free(args);
 	return (cmd);
+}
+
+char	*find_real_path(char **envp, char *cmd)
+{
+	char	**args;
+	char	*result;
+	int		i;
+
+	if (*envp == NULL && access(cmd, X_OK) == -1)
+		return (NULL);
+	if (access(cmd, X_OK) == 0)
+		return (cmd);
+	i = -1;
+	args = ft_split(cmd, ' ');
+	result = path_or_command(cmd, envp, args);
+	return (result);
 }
